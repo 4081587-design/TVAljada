@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pantalla Informativa</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- PANTALLA PRINCIPAL -->
+  <main id="screen">
+
+    <header class="top-bar">
+      <h1 id="title">Cargando contenido...</h1>
+      <div id="clock"></div>
+    </header>
+
+    <section class="content">
+      <!-- Aquí se inyecta imagen/video desde JS o API -->
+      <div id="media-container">
+        <p>Esperando contenido...</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Panel informativo • Sistema modular</span>
+    </footer>
+
+  </main>
+
+  <!-- PANEL ADMIN (BÁSICO - FUTURO CONEXIÓN API) -->
+  <aside id="admin-panel">
+    <h2>Panel de gestión</h2>
+
+    <label>Título</label>
+    <input type="text" id="input-title" placeholder="Título de pantalla"/>
+
+    <label>URL imagen/video</label>
+    <input type="text" id="input-url" placeholder="https://..."/>
+
+    <label>Tipo</label>
+    <select id="input-type">
+      <option value="image">Imagen</option>
+      <option value="video">Video</option>
+    </select>
+
+    <label>Duración (segundos)</label>
+    <input type="number" id="input-duration" value="10"/>
+
+    <button id="btn-save">Guardar (API futura)</button>
+
+    <p class="note">
+      Este panel está preparado para conectarse a GitHub API o base de datos.
+    </p>
+  </aside>
+
+  <script>
+    // ⏰ RELOJ SIMPLE
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").textContent =
+        now.toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 🔌 ESPACIO PARA CONECTAR API DESPUÉS
+    // Aquí luego puedes conectar:
+    // - fetch('/api/content')
+    // - GitHub API
+    // - Firebase
+    // - Base de datos propia
+
+    document.getElementById("btn-save").addEventListener("click", () => {
+      const data = {
+        title: document.getElementById("input-title").value,
+        url: document.getElementById("input-url").value,
+        type: document.getElementById("input-type").value,
+        duration: document.getElementById("input-duration").value
+      };
+
+      console.log("LISTO PARA ENVIAR A API:", data);
+      alert("Datos preparados para conexión con backend");
+    });
+  </script>
+
+</body>
+</html>
