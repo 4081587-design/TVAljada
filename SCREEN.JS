@@ -4,74 +4,58 @@ let contenido = [];
 let actual = 0;
 
 async function cargarJSON(){
-
-  const respuesta = await fetch("data.json");
-
-  contenido = await respuesta.json();
-
-  iniciarRotacion();
+  const res = await fetch("data.json");
+  contenido = await res.json();
+  play();
 }
 
-function iniciarRotacion(){
-
+function play(){
   if(contenido.length === 0) return;
-
-  mostrarContenido(contenido[actual]);
+  mostrar(contenido[actual]);
 }
 
-function mostrarContenido(item){
+function mostrar(item){
 
   pantalla.innerHTML = "";
 
   const ahora = new Date();
-
   const inicio = new Date(item.inicio);
   const fin = new Date(item.fin);
 
   if(ahora < inicio || ahora > fin){
-
     siguiente();
     return;
   }
 
   if(item.tipo === "imagen"){
-
     const img = document.createElement("img");
-
     img.src = item.archivo;
-
     pantalla.appendChild(img);
+
+    setTimeout(siguiente, item.duracion * 1000);
   }
 
   if(item.tipo === "video"){
-
     const video = document.createElement("video");
-
     video.src = item.archivo;
-
     video.autoplay = true;
     video.muted = true;
+    video.playsInline = true;
+
+    video.onended = siguiente;
 
     pantalla.appendChild(video);
   }
-
-  setTimeout(() => {
-
-    siguiente();
-
-  }, item.duracion * 1000);
 }
 
 function siguiente(){
-
   actual++;
 
   if(actual >= contenido.length){
-
     actual = 0;
   }
 
-  mostrarContenido(contenido[actual]);
+  mostrar(contenido[actual]);
 }
 
 cargarJSON();

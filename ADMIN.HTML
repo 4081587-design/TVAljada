@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Panel de Gestión</h1>
+
+<div class="panel">
+
+  <input type="text" id="archivo" placeholder="media/foto.jpg o video.mp4">
+
+  <select id="tipo">
+    <option value="imagen">Imagen</option>
+    <option value="video">Video</option>
+  </select>
+
+  <input type="number" id="duracion" placeholder="Duración (seg)">
+
+  <input type="datetime-local" id="inicio">
+  <input type="datetime-local" id="fin">
+
+  <button onclick="guardar()">Guardar</button>
+
+</div>
+
+<hr>
+
+<ul id="lista"></ul>
+
+<script src="ADMIN.JS"></script>
+</body>
+</html>
